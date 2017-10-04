@@ -1,7 +1,7 @@
 class Modal {
   constructor() {
     this.add = [],
-    this.callback = null;
+      this.callback = null;
   }
   suscribe(render) {
     this.callback = render;
@@ -16,6 +16,23 @@ class Modal {
         name: this.input.value,
       })
     }
+    this.callback();
+    this.notify();
+  }
+  listar() {
+    let li = "";
+    if (this.add.length != 0) {
+      li = this.add.map((item, index) => {
+        return (
+          <li key={index}>
+            {item.name}
+            <label>Confirmed<input type="checkbox" /></label>
+            <button>remove</button>
+          </li>
+        )
+      });
+    }
+    return (<ul>{li}</ul>)
     this.callback();
     this.notify();
   }
@@ -44,17 +61,11 @@ const Section = ({ modal }) => {
     <div>
       <div className="main">
         <h2>Invitees</h2>
-        <ul id="invitedList">
-          <li>
-            <label>Confirmed<input type="checkbox" /></label>
-            <button>remove</button>
-          </li>
-        </ul>
+        {modal.listar()}
       </div>
     </div>
   )
 }
-
 
 const Aplication = ({ title, modal }) => {
   return (
