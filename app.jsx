@@ -16,9 +16,12 @@ class Modal {
         name: this.input.value,
       })
     }
-    this.callback();
     this.notify();
   }
+  removeTodo(remov) {
+    this.add = this.add.filter(item => item !== remov);
+    this.notify();
+ }
   listar() {
     let li = "";
     if (this.add.length != 0) {
@@ -27,13 +30,12 @@ class Modal {
           <li key={index}>
             {item.name}
             <label>Confirmed<input type="checkbox" /></label>
-            <button>remove</button>
+            <button onClick={() => modal.removeTodo(item)}>remove</button>
           </li>
         )
       });
     }
     return (<ul>{li}</ul>)
-    this.callback();
     this.notify();
   }
 }
@@ -87,25 +89,6 @@ let render = () => {
 modal.suscribe(render);
 render();
 
-// let Header = React.createClass({
-//   render: function () {
-//     return (
-//     <div>
-//     <header id="registrar">
-//       <h1>RSVP</h1>
-//       <p> Registration App </p>
-//       <form  onSubmit={e => {
-//         e.preventDefault();
-//         modal.agregar(name);
-//         }}>
-//         <input type="text" onChange={e=>(modal.input=e.target)} name="name" placeholder="Invite Someone" />
-//         <button type="submit" name="submit" value="submit">Submit</button>
-//       </form>
-//     </header>
-//     </div>
-//     )
-//   }
-// })
 
 
 
